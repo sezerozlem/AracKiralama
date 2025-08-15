@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ford Focus araç kiralama fırsatları. Hemen kiralayın!">
+    <title>Renault Clio | BOSS Araç Kiralama</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        header .logo {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .image-container {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+
+        .details-container {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        table {
+            width: auto;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+        }
+
+        table tr,
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table .tr1 {
+            background-color: rgb(225, 223, 223);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #007bff;
+            color: #ffffff;
+            border: 0;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #ffffff;
+            color: #007bff;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .contact-section {
+            padding: 2rem;
+            background: #f9f9f9;
+            text-align: center;
+        }
+
+        .contact-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-section ul li {
+            margin: 0.5rem 0;
+        }
+
+        .deta-body {
+            flex: 1;
+        }
+
+        .main-footer {
+            background: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 20px;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 15px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <img src="Resimler/logo.png" alt="Araç Kiralama Logo" class="logo">
+        <h1>BOSS Araç Kiralama</h1>
+    </header>
+
+    <section class="deta-body">
+        <div class="container">
+            <div class="image-container">
+                <img src="Resimler/araba2.png" alt="Ford Focus araç görüntüsü">
+            </div>
+            <div class="details-container">
+                <table>
+                    <tbody>
+                        <tr class="tr1">
+                            <td>Günlük:</td>
+                            <td>450₺</td>
+                        </tr>
+                        <tr>
+                            <td>Mesafe Ücreti:</td>
+                            <td>5,50₺/Km</td>
+                        </tr>
+                        <tr class="tr1">
+                            <td>Provizyon Bedeli:</td>
+                            <td>800,00₺</td>
+                        </tr>
+                        <tr>
+                            <td>Vites: <img src="Resimler/otomatik.png" alt="Otomatik Vites İkonu"> Otomatik</td>
+                            <td>Yakıt: <i class="fa-solid fa-gas-pump"></i> Dizel</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="odeme_ekrani.html" class="btn">ARACI KİRALA <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2>İletişim</h2>
+        <hr>
+        <p>Bizimle iletişime geçmek için aşağıdaki bilgileri kullanabilirsiniz:</p>
+        <ul>
+            <li>Email: <a href="mailto:info@bossarackiralama.com">info@bossarackiralama.com</a></li>
+            <li>Telefon: <a href="tel:+905555555555">+90 555 555 5555</a></li>
+            <li>Adres: Kırklareli, Türkiye</li>
+        </ul>
+    </section>
+
+    <footer class="main-footer">
+        <p>&copy; 2024 Araç Kiralama. Tüm hakları saklıdır.</p>
+    </footer>
+</body>
+
+</html>

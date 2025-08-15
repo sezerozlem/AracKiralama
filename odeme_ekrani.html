@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme Ekranı | BOSS Araç Kiralama</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        header .logo {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+
+        .odeme-kapsayici {
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            max-width: 600px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .odeme-kapsayici h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .odeme-kapsayici input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .buton {
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .buton:hover {
+            background-color: #0056b3;
+        }
+
+        .mesaj {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .basarili {
+            color: green;
+        }
+
+        .hata {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="Resimler/logo.png" alt="Araç Kiralama Logo" class="logo">
+        <h1>BOSS Araç Kiralama</h1>
+    </header>
+
+    <div class="odeme-kapsayici">
+        <h2>Ödeme Ekranı</h2>
+        <form onsubmit="return false;">
+            <input type="text" id="kartSahibi" placeholder="Kart Sahibinin Adı" oninput="buyukHarfYap(this)">
+            <input type="text" id="kartNumarasi" placeholder="Kart Numarası (16 hane)" maxlength="16"
+                oninput="kartNumarasiDegistir()">
+            <input type="text" id="sonKullanmaTarihi" placeholder="Son Kullanma Tarihi (MM/YY)" maxlength="5"
+                oninput="tarihDegistir()">
+            <input type="text" id="cvv" placeholder="CVV (3 hane)" maxlength="3" oninput="cvvDegistir()">
+            <button type="button" class="buton" onclick="odemeIslemi()">Ödemeyi Tamamla</button>
+
+        </form>
+        <p id="mesaj" class="mesaj"></p>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 BOSS Araç Kiralama. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script>
+        // Kart Numarası Alanı (sadece rakam)
+        function kartNumarasiDegistir() {
+            const kartNumarasiInput = document.getElementById("kartNumarasi");
+            let kartNumarasi = kartNumarasiInput.value.trim();
+
+            // Sadece rakamları al
+            kartNumarasi = kartNumarasi.replace(/\D/g, '');
+
+            // Maksimum 16 rakam
+            if (kartNumarasi.length > 16) {
+                kartNumarasi = kartNumarasi.substring(0, 16);
+            }
+
+            // Inputu güncelle
+            kartNumarasiInput.value = kartNumarasi;
+        }
+
+        // CVV Alanı (sadece rakam ve 3 haneli)
+        function cvvDegistir() {
+            const cvvInput = document.getElementById("cvv");
+            let cvv = cvvInput.value.trim();
+
+            // Sadece rakamları al
+            cvv = cvv.replace(/\D/g, '');
+
+            // Maksimum 3 rakam
+            if (cvv.length > 3) {
+                cvv = cvv.substring(0, 3); // 3 haneli olmalı
+            }
+
+            // Inputu güncelle
+            cvvInput.value = cvv;
+        }
+
+        // Son Kullanma Tarihi Alanı (MM/YY)
+        function tarihDegistir() {
+            const tarihInput = document.getElementById("sonKullanmaTarihi");
+            let tarih = tarihInput.value.trim();
+
+            // Sadece rakamları al
+            tarih = tarih.replace(/\D/g, '');
+
+            // Maksimum 5 karakter (MM/YY formatı)
+            if (tarih.length > 4) {
+                tarih = tarih.substring(0, 4); // 4 haneli olmalı
+            }
+
+            // Eğer 2 karakter girildiyse, otomatik olarak / ekle
+            if (tarih.length >= 2 && tarih.length <= 4) {
+                tarih = tarih.substring(0, 2) + '/' + tarih.substring(2, 4);
+            }
+
+            // Inputu güncelle
+            tarihInput.value = tarih;
+        }
+
+        // Ad Soyad Alanı (Büyük Harfe Dönüştürme)
+        function buyukHarfYap(inputElement) {
+            inputElement.value = inputElement.value.toUpperCase(); // Girilen metni büyük harfe dönüştür
+        }
+
+        // Ödeme İşlemi
+        function odemeIslemi() {
+            // Giriş değerlerini al
+            const kartSahibi = document.getElementById("kartSahibi").value.trim();
+            const kartNumarasi = document.getElementById("kartNumarasi").value.trim();
+            const sonKullanmaTarihi = document.getElementById("sonKullanmaTarihi").value.trim();
+            const cvv = document.getElementById("cvv").value.trim();
+
+            // Doğrulama regex'leri
+            const kartNumarasiRegex = /^\d{16}$/;
+            const sonKullanmaTarihiRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+            const cvvRegex = /^\d{3}$/;
+
+            // Hata mesajlarını temizle
+            const mesajElementi = document.getElementById("mesaj");
+            mesajElementi.innerHTML = ""; // Eski hata mesajlarını temizle
+            let hataVarMi = false;
+
+            // Hatalı alanlar için hata mesajları
+            let hataMesajlari = [];
+
+            // Kart Sahibi kontrolü
+            const kartSahibiInput = document.getElementById("kartSahibi");
+            if (kartSahibi === "") {
+                hataVarMi = true;
+                kartSahibiInput.style.borderColor = "red";
+                hataMesajlari.push("Kart sahibinin adı gerekli!");
+            } else {
+                kartSahibiInput.style.borderColor = "#ddd";
+            }
+
+            // Kart Numarası kontrolü (sadece rakam ve 16 haneli olmalı)
+            const kartNumarasiInput = document.getElementById("kartNumarasi");
+            if (!kartNumarasiRegex.test(kartNumarasi)) {
+                hataVarMi = true;
+                kartNumarasiInput.style.borderColor = "red";
+                hataMesajlari.push("Kart numarası 16 haneli olmalı!");
+            } else {
+                kartNumarasiInput.style.borderColor = "#ddd";
+            }
+
+            // Son Kullanma Tarihi kontrolü
+            const sonKullanmaTarihiInput = document.getElementById("sonKullanmaTarihi");
+            if (!sonKullanmaTarihiRegex.test(sonKullanmaTarihi)) {
+                hataVarMi = true;
+                sonKullanmaTarihiInput.style.borderColor = "red";
+                hataMesajlari.push("Geçerli bir son kullanma tarihi (MM/YY) girin!");
+            } else {
+                sonKullanmaTarihiInput.style.borderColor = "#ddd";
+            }
+
+            // CVV kontrolü (sadece rakam ve 3 haneli olmalı)
+            const cvvInput = document.getElementById("cvv");
+            if (!cvvRegex.test(cvv)) {
+                hataVarMi = true;
+                cvvInput.style.borderColor = "red";
+                hataMesajlari.push("CVV 3 haneli olmalı!");
+            } else {
+                cvvInput.style.borderColor = "#ddd";
+            }
+
+            // Eğer hata varsa, hata mesajlarını göster
+            if (hataVarMi) {
+                mesajElementi.innerHTML = hataMesajlari.join('<br>'); // Hata mesajlarını alt alta yazdır
+                mesajElementi.className = "mesaj hata";
+            } else {
+                // Eğer hata yoksa, başarılı mesajını göster
+                mesajElementi.innerText = "Ödeme alındı!";
+                mesajElementi.className = "mesaj basarili";
+            }
+        }
+    </script>
+</body>
+
+</html>
